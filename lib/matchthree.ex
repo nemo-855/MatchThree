@@ -2,10 +2,9 @@ defmodule MatchThree do
   use Application
 
   def start(_type, _args) do
-    Board.initialize(4, 5) |> Output.print_board()
-
-    atom = Input.listen_for_key_press()
-    IO.puts "Success #{atom}"
+#    Input.SelectingDrop.listen_key_press_for_selecting_drop()
+#    |> Board.initialize()
+#    |> Output.print_board()
 
     {:ok, self()}
   end
