@@ -1,21 +1,5 @@
 # Matchthree
+Elixirで実装した、パズドラライクなゲーム
 
-**TODO: Add description**
-
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `matchthree` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:matchthree, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/matchthree>.
+https://github.com/nemo-855/MatchThree/assets/77588574/a1d9010d-5389-4003-97b3-e351aaae3786
 
