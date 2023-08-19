@@ -4,7 +4,7 @@ defmodule Output do
   標準出力を扱うため純粋関数ではない。
   """
   @spec print_board(Board.t()) :: :ok
-  def print_board(%Board{content: content, selected_cell: {selected_x, selected_y}}) do
+  def print_board(%Board{content: content, selected_drop: {selected_x, selected_y}}) do
     Enum.with_index(content)
     |> Enum.map(fn {row, y_index} ->
       Enum.with_index(row)
@@ -26,7 +26,6 @@ defmodule Output do
       :red -> if is_selected, do: "[🔴]", else: " 🔴 "
       :blue -> if is_selected, do: "[🔵]", else: " 🔵 "
       :green -> if is_selected, do: "[🟢]", else: " 🟢 "
-      :yellow -> if is_selected, do: "[🟡]", else: " 🟡 "
     end
   end
 end

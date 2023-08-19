@@ -36,12 +36,13 @@ defmodule Input do
     @doc """
     ドロップ移動のためキー入力を受け取る。標準入力を扱うため純粋関数ではない。
     """
-    @spec listen_key_press_for_moving_drop() :: Turn.Action.t
+    @spec listen_key_press_for_moving_drop() :: Board.MoveDrop.direction()
     def listen_key_press_for_moving_drop do
-      key_press = IO.getn(1)
+      key_press = IO.getn("Input drop moving direction: ")
       case convert_key_to_action(key_press) do
         :inputing -> listen_key_press_for_moving_drop()
-        result -> result
+        result when result in [:up, :down, :left, :right] -> result
+        _other -> listen_key_press_for_moving_drop()
       end
     end
 

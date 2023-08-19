@@ -1,30 +1,24 @@
 defmodule Board do
-  defstruct content: [], selected_cell: {0, 0}
+  defstruct content: [], selected_drop: {0, 0}
 
   @type t :: %Board{
           content: list(list(Drop.t())),
-          selected_cell: {integer(), integer()}
+          selected_drop: {integer(), integer()}
         }
 
-  @spec initialize({integer, integer}) :: Board.t()
-  def initialize({selected_x, selected_y}) do
+  @spec initialize() :: Board.t()
+  def initialize() do
     {column_size, row_size} = get_board_size()
 
-    new_board = %Board{
+    %Board{
       content:
         Enum.map(1..column_size, fn _ ->
           Enum.map(1..row_size, fn _ ->
             Drop.random_drop()
           end)
         end),
-      selected_cell: {0, 0}
+      selected_drop: {0, 0}
     }
-
-    if exist_position?(new_board, {selected_x, selected_y}) do
-      %Board{new_board | selected_cell: {selected_x, selected_y}}
-    else
-      new_board
-    end
   end
 
   @spec select_drop(Board.t()) :: (tuple() -> Board.t())
@@ -32,7 +26,7 @@ defmodule Board do
     fn
       {new_x, new_y} ->
       if exist_position?(board, {new_x, new_y}) do
-        %Board{board | selected_cell: {new_x, new_y}}
+        %Board{board | selected_drop: {new_x, new_y}}
       else
         board
       end
@@ -42,7 +36,7 @@ defmodule Board do
 
   @spec get_board_size() :: {integer, integer}
   defp get_board_size do
-    {5, 5}
+    {3, 3}
   end
 
   @spec exist_position?(Board.t(), {integer, integer}) :: boolean()

@@ -7,35 +7,40 @@ defmodule MoveDrop do
   移動先にドロップが存在する場合、指定されたドロップと入れ替えたボードを返す
   移動先にドロップが存在しない場合、与えられたボードをそのまま返す
   """
-  def execute(board, {x, y}, direction) do
-    case get_next_position(board, {x, y}, direction) do
-      {next_x, next_y} -> swap(board, {x, y}, {next_x, next_y})
+  @spec execute(Board.t(), MoveDrop.direction()) :: Board.t()
+  def execute(board, direction) do
+    case get_next_position(board, direction) do
+      {next_x, next_y} -> swap(board, {next_x, next_y})
       _ -> board
     end
   end
 
-  defp get_next_position(board, {x, y}, direction) do
+  @spec get_next_position(Board.t(), MoveDrop.direction()) :: {integer, integer}
+  defp get_next_position(%Board{content: content, selected_drop: {x, y}}, direction) do
     case direction do
       :up ->
         {x, Enum.max([y - 1, 0])}
       :down ->
-        {x, Enum.min([y + 1, length(board) - 1])}
+        {x, Enum.min([y + 1, length(content) - 1])}
       :left ->
         {Enum.max([x - 1, 0]), y}
       :right ->
-        {Enum.min([x + 1, length(Enum.at(board, 0)) - 1]), y}
+        {Enum.min([x + 1, length(Enum.at(content, 0)) - 1]), y}
     end
   end
 
-  defp swap(board, {x1, y1}, {x2, y2}) do
-    Enum.with_index(board) |> Enum.map(fn {columns, y} ->
+  @spec swap(Board.t(), {integer, integer}) :: Board.t()
+  defp swap(%Board{content: content, selected_drop: {x1, y1}}, {x2, y2}) do
+    new_content = Enum.with_index(content) |> Enum.map(fn {columns, y} ->
       Enum.with_index(columns) |> Enum.map(fn {drop, x} ->
         case {x, y} do
-          {^x1, ^y1} -> Enum.at(Enum.at(board, y2), x2)
-          {^x2, ^y2} -> Enum.at(Enum.at(board, y1), x1)
+          {^x1, ^y1} -> Enum.at(Enum.at(content, y2), x2)
+          {^x2, ^y2} -> Enum.at(Enum.at(content, y1), x1)
           _ -> drop
         end
       end)
     end)
+
+    %Board{content: new_content, selected_drop: {x2, y2}}
   end
 end
