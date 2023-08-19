@@ -12,11 +12,20 @@ defmodule MatchThree do
 
     Output.print_board(drop_selected_board)
 
+    move_drop_continuously(drop_selected_board)
+
+    {:ok, self()}
+  end
+
+  @doc """
+  ドロップ移動のためキー入力を受け取る。標準入力を扱うため純粋関数ではない。
+  """
+  defp move_drop_continuously(current_board) do
     direction = Input.MovingDrop.listen_key_press_for_moving_drop()
-    new_board = MoveDrop.execute(drop_selected_board, direction)
+    new_board = MoveDrop.execute(current_board, direction)
 
     Output.print_board(new_board)
 
-    {:ok, self()}
+    move_drop_continuously(new_board)
   end
 end
