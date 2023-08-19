@@ -36,7 +36,7 @@ defmodule Board do
 
   @spec get_board_size() :: {integer, integer}
   defp get_board_size do
-    {3, 3}
+    {6, 5}
   end
 
   @spec exist_position?(Board.t(), {integer, integer}) :: boolean()

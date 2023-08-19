@@ -26,6 +26,7 @@ defmodule Output do
       :red -> if is_selected, do: "[🔴]", else: " 🔴 "
       :blue -> if is_selected, do: "[🔵]", else: " 🔵 "
       :green -> if is_selected, do: "[🟢]", else: " 🟢 "
+      :yellow -> if is_selected, do: "[🟡]", else: " 🟡 "
     end
   end
 end
