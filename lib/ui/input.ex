@@ -5,8 +5,8 @@ defmodule Input do
     """
     @spec listen_key_press_for_selecting_drop() :: {integer(), integer()}
     def listen_key_press_for_selecting_drop do
-      x_input = prompt_input_until_valid("Enter x: ")
-      y_input = prompt_input_until_valid("Enter y: ")
+      x_input = prompt_input_until_valid("x: ")
+      y_input = prompt_input_until_valid("y: ")
 
       {x_input, y_input}
     end
@@ -14,8 +14,7 @@ defmodule Input do
     # 標準入力を扱うため純粋関数ではない。
     @spec prompt_input_until_valid(String.t()) :: integer()
     defp prompt_input_until_valid(prompt) do
-      IO.puts(prompt)
-      input = IO.getn(1) |> String.trim()
+      input = IO.getn("Input #{prompt}") |> String.trim()
 
       if is_integer_string?(input) do
         input |> String.to_integer()
