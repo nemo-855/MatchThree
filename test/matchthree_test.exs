@@ -3,6 +3,6 @@ defmodule MatchthreeTest do
   doctest Matchthree
 
   test "greets the world" do
-    assert Matchthree.hello() == :world
+    assert Matchthree.main() == :world
   end
 end
