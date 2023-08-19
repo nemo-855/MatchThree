@@ -10,9 +10,6 @@ defmodule Input do
     end
   end
 
-  @doc """
-  キー入力を受け取り、対応する[Turn.Action.t]に変換する
-  """
   @spec convert(String.t) :: Turn.Action.t
   defp convert(key_press) do
     case key_press do
