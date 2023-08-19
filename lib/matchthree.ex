@@ -1,6 +1,6 @@
 defmodule Matchthree do
   def main do
-    board = Board.initialize(5, 4)
+    board = Board.initialize(4, 5)
 
     IO.puts(
       Enum.map(board, fn row ->
